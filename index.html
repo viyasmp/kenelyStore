@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kenely || Store</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* === RESET & BASE === */
+    *{margin:0;padding:0;box-sizing:border-box}
+    body,html{height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#fff;overflow-x:hidden}
+    a{color:#fff;text-decoration:none}
+
+    /* === BACKGROUND === */
+    #bgVideo{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+    .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0%,#0d0d0d 100%);opacity:.55;z-index:-1}
+
+    /* === PARTICLES === */
+    #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+
+    /* === MAIN LAYOUT === */
+    main{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}
+    .logo{width:110px;height:110px;border-radius:50%;border:3px solid #fff;object-fit:cover;margin-bottom:.8rem;animation:fadeInScale 1s ease forwards}
+    h1{font-size:2.4rem;letter-spacing:2px;margin-bottom:.4rem}
+    .tagline{font-size:1rem;opacity:.8;margin-bottom:2.5rem}
+
+    /* === RUNNING TEXT === */
+    .running-text{
+      width:100%;
+      overflow:hidden;
+      margin-bottom:2rem;
+      background:rgba(0,0,0,.4);
+      border-radius:8px;
+      padding:.8rem 0;
+    }
+    .running-text span{
+      display:inline-block;
+      white-space:nowrap;
+      animation:scroll 15s linear infinite;
+      padding-left:100%;
+      font-weight:600;
+    }
+    @keyframes scroll{to{transform:translateX(-100%)}}
+
+    /* === BUTTONS === */
+    .links{display:flex;flex-direction:column;gap:1rem;width:100%;max-width:320px}
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      padding:.9rem 1.2rem;
+      background:#ffffff11;
+      border:1px solid #ffffff33;
+      border-radius:50px;
+      backdrop-filter:blur(8px);
+      transition:.3s;
+      opacity:0;
+      transform:translateY(20px);
+      animation:fadeInUp .6s forwards;
+    }
+    .btn:nth-child(1){animation-delay:.2s}
+    .btn:nth-child(2){animation-delay:.4s}
+    .btn:nth-child(3){animation-delay:.6s}
+    .btn:nth-child(4){animation-delay:.8s}
+    .btn:nth-child(5){animation-delay:1s}
+    .btn:nth-child(6){animation-delay:1.2s}
+    .btn:hover{background:#fff;color:#111;transform:translateY(-3px) scale(1.05)}
+    @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeInScale{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+
+    footer{margin-top:2.5rem;font-size:.75rem;opacity:.5}
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://cdn.coverr.co/videos/coverr-sneaker-close-up-loop-2665/1080p.mp4" type="video/mp4">
+  </video>
+
+  <!-- Partikel ringan -->
+  <div id="particles-js"></div>
+
+  <!-- Overlay gelap + gradasi -->
+  <div class="overlay"></div>
+
+  <main>
+    <img src="data:image/jpeg;base64,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"
+        alt="KenelyStore Logo" class="logo">
+
+    <h1>KenelyStore</h1>
+    <p class="tagline">Sneakers & Streetwear • Fast Respon</p>
+
+    <!-- Running text -->
+    <div class="running-text">
+      <span>
+        🚀 Jasa Buat Website • 🔧 Fix Plugins Server Minecraft • 🎨 Jasa Desain Logo • Order Sekarang!
+      </span>
+    </div>
+
+    <div class="links">
+      <a class="btn" href="https://sociabuzz.com/kenelystore/tribe" target="_blank">
+        <i class="fa-solid fa-mug-hot"></i> Saweria
+      </a>
+      <a class="btn" href="https://chat.whatsapp.com/IgECqW9f09e8AWqJPgw2Ze?mode=ac_t" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Grup WhatsApp
+      </a>
+      <a class="btn" href="https://discord.gg/kenelystore" target="_blank">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
+
+      <!-- 3 layanan baru -->
+      <a class="btn" href="https://wa.me/6283150082652?text=Halo%20KenelyStore%2C%20saya%20ingin%20order%20jasa%20buat%20website" target="_blank">
+        <i class="fa-solid fa-code"></i> Jasa Buat Website
+      </a>
+      <a class="btn" href="https://wa.me/6283150082652?text=Halo%20KenelyStore%2C%20saya%20butuh%20bantuan%20fix%20plugin%20server%20Minecraft" target="_blank">
+        <i class="fa-solid fa-cubes"></i> Fix Plugins Minecraft
+      </a>
+      <a class="btn" href="https://wa.me/6283150082652?text=Halo%20KenelyStore%2C%20saya%20mau%20pesan%20desain%20logo" target="_blank">
+        <i class="fa-solid fa-palette"></i> Jasa Desain Logo
+      </a>
+    </div>
+
+    <footer>
+      <p>#kenelyStore</p>
+      <small>&copy; 2025 KenelyStore</small>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    /* --- particles.js default --- */
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: .35 },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#ffffff',
+          opacity: .25,
+          width: 1
+        },
+        move: { enable: true, speed: 2, direction: 'none', out_mode: 'out' }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'grab' },
+          onclick: { enable: true, mode: 'push' }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>
